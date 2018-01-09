@@ -1,1 +1,1 @@
-# hacker-rank
+# Repository for hacker rank tasks
