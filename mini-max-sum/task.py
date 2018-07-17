@@ -18,11 +18,6 @@ def mini_max_sum(arr):
         sums.append(sum(next_sum))
     print str(min(sums)) + ' ' + str(max(sums))
 
-def make_sum_with_exception(index_to_omit):
-    def sum_with_exception(acc, next):
-        pass
-    return
-
 if __name__ == '__main__':
     arr = map(int, raw_input().rstrip().split())
 
