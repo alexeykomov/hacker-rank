@@ -12,19 +12,33 @@ def largest_rectangle(hist):
     max_area = -1
     top = 0
 
-    for rectangle_counter in range(0, len(hist)):
-        if len(stack) == 0 or hist[stack[-1]] < hist[rectangle_counter]:
-            stack.append(rectangle_counter)
+    for counter in range(0, len(hist)):
+        if len(stack) == 0 or hist[stack[-1]] <= hist[counter]:
+            stack.append(counter)
         else:
-            while len(stack) and hist[stack[-1]] > hist[rectangle_counter]:
+            while len(stack) and hist[stack[-1]] >= hist[counter]:
                 top = stack.pop()
-                area = hist[top] * (rectangle_counter - top - 1)
+                if len(stack)пые:
+                    area = hist[top] * (counter - stack[-1] - 1)
+                else:
+                    area = hist[top] * counter
                 if area > max_area:
                     max_area = area
+            stack.append(counter)
+
+    while len(stack):
+        top = stack.pop()
+        if len(stack):
+            area = hist[top] * (len(hist) - stack[-1] - 1)
+        else:
+            area = hist[top] * len(hist)
+        if area > max_area:
+            max_area = area
+
+    return max_area
 
 
 if __name__ == '__main__':
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
 
     n = int(raw_input())
 
@@ -32,6 +46,4 @@ if __name__ == '__main__':
 
     result = largest_rectangle(h)
 
-    fptr.write(str(result) + '\n')
-
-    fptr.close()
+    print result
